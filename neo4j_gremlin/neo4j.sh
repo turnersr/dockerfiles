@@ -33,6 +33,6 @@ if [ -d /conf ]; then
 	cp -R /conf/ $NEO4J_HOME/conf/
 fi
 
-sed -i "s|#org.neo4j.server.webserver.address=0.0.0.0|org.neo4j.server.webserver.address=$HOSTNAME|g" $NEO4J_HOME/conf/neo4j-server.properties
+sed -i "s|#org.neo4j.server.webserver.address=127.0.0.1|org.neo4j.server.webserver.address=0.0.0.0|g" $NEO4J_HOME/conf/neo4j-server.properties
 
 exec neo4j console
