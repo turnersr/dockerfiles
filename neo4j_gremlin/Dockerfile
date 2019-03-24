@@ -86,5 +86,6 @@ RUN echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 RUN echo "PATH=$GOPATH/bin:$GOROOT/bin:$PATH" > /root/go.sh
 RUN bash -c "source /root/.bashrc"
 ADD . / /home/
+RUN apt-get install ack-grep -y
 EXPOSE 7474
 #CMD ["/neo4j.sh"]
