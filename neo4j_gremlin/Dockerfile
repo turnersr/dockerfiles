@@ -50,6 +50,7 @@ RUN apt-get install -y tmux
 RUN pip install virtualenv --upgrade
 RUN pip install --upgrade pip
 RUN apt-get install -y build-essential libssl-dev libffi-dev
+RUN apt-get install ctags -y
 # install joern
 RUN cd /opt/ && wget https://github.com/fabsx00/joern/archive/0.3.1.tar.gz && tar xfzv 0.3.1.tar.gz
 RUN cd /opt/joern-0.3.1 && wget http://mlsec.org/joern/lib/lib.tar.gz && tar xfzv lib.tar.gz
@@ -77,8 +78,13 @@ WORKDIR /opt/joern-0.3.1
 RUN ./joern tutorial/vlc-2.1.4/
 RUN apt-get install -y emacs-nox
 RUN chmod -R 777 /opt/joern-0.3.1/
-
-RUN echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/neo4j/bin" > /root/.bashrc
-
+WORKDIR /home/
+RUN wget https://dl.google.com/go/go1.12.1.linux-amd64.tar.gz
+RUN tar -xvf go1.12.1.linux-amd64.tar.gz
+RUN mv go /usr/local
+RUN echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/neo4j/bin\nexport GOROOT=/usr/local/go\nexport GOROOT=/usr/local/go\nexport GOPATH=$HOME/Projects\nexport PATH=$HOME/Projects/bin:/usr/local/go/bin:$PATH" > /root/.bashrc
+RUN echo "PATH=$GOPATH/bin:$GOROOT/bin:$PATH" > /root/go.sh
+RUN bash -c "source /root/.bashrc"
+ADD . / /home/
 EXPOSE 7474
 #CMD ["/neo4j.sh"]
