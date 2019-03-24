@@ -66,3 +66,5 @@ Then you are completely responsible yourself for providing the correctly set-up 
 
 * Provide initial password externally
 * "docker stop" needs to execute graceful shutdown
+
+`docker run  -v /Users/wonderland/Projects/dockerfiles/neo4j_gremlin/:/hi/ -p 7474:7474 -it b4ba29d307b7 /bin/bash`

@@ -43,7 +43,6 @@ RUN unzip target/neo4j-gremlin-plugin-2.1-SNAPSHOT-server-plugin.zip -d /var/lib
 VOLUME /data
 
 COPY neo4j.sh /neo4j.sh
-EXPOSE 7474 7473
 
 RUN apt-get update
 RUN apt-get upgrade -y && apt-get install -y python-dev python-setuptools python-pip graphviz libgraphviz-dev ant python-pygraphviz python-pip && apt-get clean
@@ -78,4 +77,8 @@ WORKDIR /opt/joern-0.3.1
 RUN ./joern tutorial/vlc-2.1.4/
 RUN apt-get install -y emacs-nox
 RUN chmod -R 777 /opt/joern-0.3.1/
+
+RUN echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/neo4j/bin" > /root/.bashrc
+
+EXPOSE 7474
 #CMD ["/neo4j.sh"]
